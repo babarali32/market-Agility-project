@@ -1,5 +1,6 @@
 package utils;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
@@ -29,9 +30,11 @@ public class CommonMethods extends PageInitializers {
     public static void openBrowserAndLaunchApplication()  {
         switch (ConfigReader.getProperty("browser")) {
             case "Chrome":
-                ChromeOptions chromeOptions = new ChromeOptions();
+              //  ChromeOptions chromeOptions = new ChromeOptions();
                 // chromeOptions.addArguments("--headless");
-                driver = new ChromeDriver(chromeOptions);
+                //driver = new ChromeDriver(chromeOptions);
+                WebDriverManager.chromedriver().setup();
+                driver=new ChromeDriver();
                 break;
             case "FireFox":
                 driver = new FirefoxDriver();
@@ -102,7 +105,7 @@ public class CommonMethods extends PageInitializers {
     public void closeBrowser() {
         if(driver!= null) {
             saveCookies("cookies.data");
-            driver.quit();
+            // driver.quit();
         }
     }
 
